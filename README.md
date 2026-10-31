@@ -280,6 +280,36 @@ Chrome 136 起，远程调试的确认流程与旧版本不同；Chrome 144+ 提
   不注入进程、不模拟屏幕坐标。它不替代 Chrome 的安全机制；请仅在你拥有或获授权使用的
   机器上运行，不要用它替他人做授权决定。
 
+## 已知限制与边界情况
+
+当前版本只在“Windows 11 + Chrome 156 中文 UI + Windows PowerShell 5.1 + 普通用户权限”
+组合下做过真实点击验证。以下场景尚未完成真实环境验证，行为可能随系统、Chrome 版本或
+企业策略变化；遇到问题时欢迎提 issue。
+
+- **英文 Chrome UI**：`Allow` / `Allow remote debugging?` 已由 PowerShell 匹配测试覆盖，
+  但未触发真实英文弹窗。
+- **权限级别不一致**：若 Chrome 以管理员身份运行而终端是普通用户，UI Automation 可能
+  返回 `permission_denied`（退出码 3）。请统一终端与 Chrome 的权限级别；本工具不会提权，
+  也不会绕过 Windows UIPI。
+- **多个 Chrome 窗口 / 多个弹窗**：实现会枚举所有 Chrome 进程窗口并逐个匹配，但尚未
+  构造真实的多窗口、多弹窗矩阵；极端情况下可能只处理先匹配到的弹窗。
+- **Chrome 136–155**：仅在 Chrome 156 验证。Chrome 的确认弹窗是自绘 UI，UIA 结构可能
+  随版本变化；可通过 `--button`、`--title` 和 `status --probe` 适配。
+- **`chrome-devtools` 自动连接**：`start` 的 `chrome-devtools list_pages` 路径目前仅用
+  mock 验证；真实 CLI 需安装 `chrome-devtools-mcp@latest` 后手工确认。
+- **企业策略 / EDR / 锁屏**：UI Automation 可能被策略阻止；工具会报告错误，不会绕过
+  任何安全机制。
+- **其他语言 UI**：默认只匹配 `Allow` / `允许`；其他语言需通过 `--button` 和
+  `--title` 显式配置。
+
+如果遇到未覆盖的弹窗结构，请在 issue 中附上（注意先脱敏）：
+
+```bash
+chrome-auto-connect-win --version
+chrome-auto-connect-win status --probe --json
+chrome --version
+```
+
 ## 故障排查
 
 ### 找不到弹窗 / 超时
@@ -371,4 +401,4 @@ npm pack
 ## 许可证
 
 MIT。原 macOS 项目版权归 x99wang（2026）；Windows 移植部分版权归
-chrome-auto-connect-win contributors（2026）。详见 [LICENSE](LICENSE)。
+SodiumHypo（2026）。详见 [LICENSE](LICENSE)。
