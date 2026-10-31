@@ -1,0 +1,43 @@
+{
+  "name": "chrome-auto-connect-win",
+  "version": "1.0.0",
+  "description": "Windows port of chrome-auto-connect: automatically accepts Chrome's \"Allow remote debugging?\" dialog through Windows UI Automation",
+  "main": "src/cli.js",
+  "bin": {
+    "chrome-auto-connect-win": "bin/chrome-auto-connect-win.js",
+    "chrome-auto-connect": "bin/chrome-auto-connect-win.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test \"test/*.test.js\"",
+    "test:ps": "node --test test/powershell-matcher.test.js",
+    "pack:check": "npm pack --dry-run"
+  },
+  "keywords": [
+    "chrome",
+    "devtools",
+    "cdp",
+    "debug",
+    "automation",
+    "windows",
+    "ui-automation",
+    "uia"
+  ],
+  "author": "chrome-auto-connect-win contributors",
+  "license": "MIT",
+  "os": [
+    "win32"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "scripts/*.ps1",
+    "docs/*.md",
+    "SKILL.md",
+    "README.md",
+    "LICENSE"
+  ]
+}

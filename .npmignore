@@ -1,0 +1,9 @@
+test/
+.tmp/
+.tmp-*
+*.tgz
+coverage/
+npm-debug.log*
+.git/
+.github/
+node_modules/
