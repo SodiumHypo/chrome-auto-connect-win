@@ -1,0 +1,117 @@
+{
+  "button": [
+    { "name": "Allow", "allowed": ["Allow", "允许"], "expected": true },
+    { "name": "允许", "allowed": ["Allow", "允许"], "expected": true },
+    { "name": "  Allow  ", "allowed": ["Allow"], "expected": true },
+    { "name": "&Allow", "allowed": ["Allow"], "expected": true },
+    { "name": "ALLOW", "allowed": ["allow"], "expected": true },
+    { "name": "Allow remote debugging", "allowed": ["Allow"], "expected": false },
+    { "name": "Cancel", "allowed": ["Allow", "允许"], "expected": false },
+    { "name": "", "allowed": ["Allow"], "expected": false }
+  ],
+  "title": [
+    { "text": "Allow remote debugging?", "patterns": ["remote debugging", "远程调试"], "expected": true },
+    { "text": "要允许远程调试吗？", "patterns": ["remote debugging", "远程调试"], "expected": true },
+    { "text": "Allow Remote Debugging", "patterns": ["remote debugging"], "expected": true },
+    { "text": "about:blank - Google Chrome", "patterns": ["remote debugging", "远程调试"], "expected": false },
+    { "text": "", "patterns": ["remote debugging"], "expected": false }
+  ],
+  "selection": [
+    {
+      "name": "selects English dialog",
+      "titlePatterns": ["remote debugging", "远程调试"],
+      "candidates": [
+        {
+          "name": "Allow",
+          "dialogName": "about:blank - Google Chrome",
+          "titleTexts": ["about:blank - Google Chrome"],
+          "isOffscreen": false,
+          "isEnabled": true,
+          "hasDocumentAncestor": false
+        },
+        {
+          "name": "Allow",
+          "dialogName": "Allow remote debugging?",
+          "titleTexts": ["Allow remote debugging?"],
+          "isOffscreen": false,
+          "isEnabled": true,
+          "hasDocumentAncestor": false
+        }
+      ],
+      "expectedSelected": "Allow remote debugging?",
+      "expectedReason": "title_match"
+    },
+    {
+      "name": "selects Chinese dialog",
+      "titlePatterns": ["remote debugging", "远程调试"],
+      "candidates": [
+        {
+          "name": "允许",
+          "dialogName": "要允许远程调试吗？",
+          "titleTexts": ["要允许远程调试吗？"],
+          "isOffscreen": false,
+          "isEnabled": true,
+          "hasDocumentAncestor": false
+        }
+      ],
+      "expectedSelected": "要允许远程调试吗？",
+      "expectedReason": "title_match"
+    },
+    {
+      "name": "rejects document ancestor",
+      "titlePatterns": ["remote debugging"],
+      "candidates": [
+        {
+          "name": "Allow",
+          "dialogName": "Allow remote debugging?",
+          "titleTexts": ["Allow remote debugging?"],
+          "isOffscreen": false,
+          "isEnabled": true,
+          "hasDocumentAncestor": true
+        }
+      ],
+      "expectedSelected": null,
+      "expectedReason": "no_candidates"
+    },
+    {
+      "name": "rejects offscreen and disabled",
+      "titlePatterns": ["remote debugging"],
+      "candidates": [
+        {
+          "name": "Allow",
+          "dialogName": "Allow remote debugging?",
+          "titleTexts": ["Allow remote debugging?"],
+          "isOffscreen": true,
+          "isEnabled": true,
+          "hasDocumentAncestor": false
+        },
+        {
+          "name": "Allow",
+          "dialogName": "Allow remote debugging?",
+          "titleTexts": ["Allow remote debugging?"],
+          "isOffscreen": false,
+          "isEnabled": false,
+          "hasDocumentAncestor": false
+        }
+      ],
+      "expectedSelected": null,
+      "expectedReason": "no_candidates"
+    },
+    {
+      "name": "reports title mismatch",
+      "titlePatterns": ["remote debugging", "远程调试"],
+      "candidates": [
+        {
+          "name": "Allow",
+          "dialogName": "about:blank - Google Chrome",
+          "titleTexts": ["about:blank - Google Chrome"],
+          "isOffscreen": false,
+          "isEnabled": true,
+          "hasDocumentAncestor": false
+        }
+      ],
+      "expectedSelected": null,
+      "expectedReason": "title_mismatch"
+    }
+  ]
+}
