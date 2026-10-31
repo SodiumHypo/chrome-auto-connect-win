@@ -11,9 +11,6 @@ Windows 版 Chrome 远程调试确认弹窗自动点击工具，是
 - 不使用屏幕坐标硬编码
 - 只对用户已经启动的 Chrome 确认弹窗执行 UI 自动化点击
 
-> 本仓库当前**未执行 `npm publish`**。下面的 `npm install -g chrome-auto-connect-win`
-> 适用于包发布之后；现在请使用本地 tarball 安装（见“安装”一节）。
-
 ## 功能
 
 1. 自动检测 Chrome 的“允许 / Allow”确认弹窗并点击。
@@ -58,7 +55,21 @@ Windows 版 Chrome 远程调试确认弹窗自动点击工具，是
 
 ## 安装
 
-### 本地 tarball（当前推荐）
+### npm（推荐）
+
+```bash
+npm install -g chrome-auto-connect-win
+chrome-auto-connect-win --version
+
+# 或直接运行
+npx chrome-auto-connect-win --help
+```
+
+npm 包页面：https://www.npmjs.com/package/chrome-auto-connect-win
+
+如果 registry 同步延迟或需要离线安装，可使用本地 tarball。
+
+### 本地 tarball（开发 / 离线）
 
 ```bash
 npm pack
@@ -66,7 +77,7 @@ npm install -g ./chrome-auto-connect-win-1.0.0.tgz
 chrome-auto-connect-win --version
 ```
 
-也可以安装到临时目录做隔离验证：
+隔离验证：
 
 ```bash
 mkdir C:\temp\cac-win-test
@@ -76,18 +87,10 @@ npm install D:\path\to\chrome-auto-connect-win-1.0.0.tgz
 npx chrome-auto-connect-win --help
 ```
 
-### 发布后
-
-```bash
-npm install -g chrome-auto-connect-win
-# 或
-npx chrome-auto-connect-win --help
-```
-
 ### 从源码
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/SodiumHypo/chrome-auto-connect-win.git
 cd chrome-auto-connect-win
 npm install
 npm test
@@ -284,7 +287,8 @@ Chrome 136 起，远程调试的确认流程与旧版本不同；Chrome 144+ 提
 
 当前版本只在“Windows 11 + Chrome 156 中文 UI + Windows PowerShell 5.1 + 普通用户权限”
 组合下做过真实点击验证。以下场景尚未完成真实环境验证，行为可能随系统、Chrome 版本或
-企业策略变化；遇到问题时欢迎提 issue。
+企业策略变化；遇到问题请在本仓库提 issue：
+https://github.com/SodiumHypo/chrome-auto-connect-win/issues
 
 - **英文 Chrome UI**：`Allow` / `Allow remote debugging?` 已由 PowerShell 匹配测试覆盖，
   但未触发真实英文弹窗。

@@ -23,8 +23,16 @@
     "ui-automation",
     "uia"
   ],
-  "author": "chrome-auto-connect-win contributors",
+  "author": "SodiumHypo",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SodiumHypo/chrome-auto-connect-win.git"
+  },
+  "homepage": "https://github.com/SodiumHypo/chrome-auto-connect-win#readme",
+  "bugs": {
+    "url": "https://github.com/SodiumHypo/chrome-auto-connect-win/issues"
+  },
   "os": [
     "win32"
   ],
