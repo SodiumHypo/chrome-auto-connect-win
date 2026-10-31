@@ -1,6 +1,6 @@
 {
   "name": "chrome-auto-connect-win",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Windows port of chrome-auto-connect: automatically accepts Chrome's \"Allow remote debugging?\" dialog through Windows UI Automation",
   "main": "src/cli.js",
   "bin": {
